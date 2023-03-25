@@ -18,6 +18,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     // TODO: implement build
    return MaterialApp(
+    debugShowCheckedModeBanner: false,
     onGenerateRoute:RouteGenerator.getRoute,
     initialRoute: Routes.splashRoute,
     theme: getApplicationTheme(),
