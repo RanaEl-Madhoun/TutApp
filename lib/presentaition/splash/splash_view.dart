@@ -1,7 +1,10 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:advance_course/presentaition/ResourceManager/asset_manager.dart';
 import 'package:advance_course/presentaition/ResourceManager/color_manager.dart';
+import 'package:advance_course/presentaition/ResourceManager/constants_manager.dart';
+import 'package:advance_course/presentaition/ResourceManager/route_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +16,24 @@ class SplashView extends StatefulWidget{
 }
 
 class _SplashViewState extends State<SplashView> {
+Timer ?_timer;
+
+
+_startDelay(){
+  _timer= Timer(const Duration(seconds: AppConstants.splashDelay), _goNextPage);
+}
+_goNextPage(){
+Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
+}
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _startDelay();
+
+  }
+  
+  
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -23,7 +44,10 @@ class _SplashViewState extends State<SplashView> {
      Image(image: AssetImage(ImageAssets.splashLogo),)),
    );
   }
-}
- void main(List<String> args) {
-  runApp(MaterialApp(home: SplashView(),));
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _timer?.cancel();
+    super.dispose();
+  }
 }
